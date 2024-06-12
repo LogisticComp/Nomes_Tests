@@ -1,0 +1,17 @@
+{
+  "name": "nomes_tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.14.2",
+    "playwright": "^1.44.1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.1"
+  }
+}
