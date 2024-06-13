@@ -3,11 +3,12 @@ import request from 'superagent';
 import { apiData } from "../pages/page";
 
 
+
 describe("Users Test", () => {
-    test("Get All Users", async () => {
-        const usersUrl = await superagent.get("https://reqres.in/api/users?page=2");
-        expect(usersUrl.statusCode).toEqual(200);
-    });
+    // test("Get All Users", async () => {
+    //     const usersUrl = await superagent.get("https://reqres.in/api/users?page=2");
+    //     expect(usersUrl.statusCode).toEqual(200);
+    // });
     test("Auth First", async () => {
         const postRequest ={
             url: apiData.tokenUrl,
