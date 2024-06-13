@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/node": "^20.14.2",
     "@types/superagent": "^8.1.7",
+    "faker": "^6.6.6",
     "playwright": "^1.44.1",
     "superagent": "^9.0.2",
     "ts-node": "^10.9.2",
