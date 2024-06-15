@@ -1,9 +1,11 @@
 import { faker } from '@faker-js/faker';
 
-//URL
+const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 
+//URL
 export class urlCompany {
     static addCompanyUrl: string = "http://109.205.183.105:8081/v1/api/companies";
+
 
 }
 
@@ -22,17 +24,17 @@ export const generateRequestData = () => {
       },
       {
         type: "REGON",
-        number: faker.string.numeric(9)
+        number: faker.string.numeric(14)
       }
     ],
     legalAddress: {
       address: faker.location.streetAddress(),
-      cityId: parseInt(faker.string.numeric(3)),
+      cityId: faker.helpers.arrayElement(cityIds),
       postcode: faker.string.numeric(5)
     },
     correspondenceAddress: {
       address: faker.location.streetAddress(),
-      cityId: parseInt(faker.string.numeric(3)),
+      cityId: faker.helpers.arrayElement(cityIds),
       postcode: faker.string.numeric(5)
     },
     countryId: 82,
@@ -47,4 +49,3 @@ export const generateRequestData = () => {
 
 // Генерация данных и вывод на консоль
 const requestData = generateRequestData();
-console.log(requestData);
