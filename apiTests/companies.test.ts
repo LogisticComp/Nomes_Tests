@@ -41,7 +41,7 @@ describe("Company module Tests", () => {
         }
 
         const res = await request
-            .post(urlCompany.addCompanyUrl)
+            .post(`${urlCompany.mainUrl}${urlCompany.addCompanyUrl}`)
             .set('Authorization', `Bearer ${token}`)
             .send(requestData);
             let jsonData = res.body;
@@ -132,7 +132,7 @@ describe("Company module Tests", () => {
             throw new Error("CompanyID is missing");
         }
         const res = await request
-            .get(`${urlCompany.getCompanyUrl}${companyId}`)
+            .get(`${urlCompany.mainUrl}${urlCompany.getCompanyUrl}${companyId}`)
             .set('Authorization', `Bearer ${token}`)
             let jsonData = res.body;
 
@@ -146,75 +146,75 @@ describe("Company module Tests", () => {
 
 
 
-    //CompanyShortName
-    expect(jsonData.companyShortName).toBeTruthy();
-    expect(typeof jsonData.companyShortName).toBe('string');
+            //CompanyShortName
+            expect(jsonData.companyShortName).toBeTruthy();
+            expect(typeof jsonData.companyShortName).toBe('string');
 
 
-    //companyLegalName
-        expect(jsonData.companyLegalName).toBeTruthy();
-        expect(typeof jsonData.companyLegalName).toBe('string');
-       
-        //phoneNumber
-        expect(jsonData.phoneNumber).toBeTruthy();
-        expect(typeof jsonData.phoneNumber).toBe('string');
-        expect(jsonData.phoneNumber).toHaveLength(11);
-
-        //e-mail
-        expect(jsonData.email).toBeTruthy();
-        expect(typeof jsonData.email).toBe('string');
-
-        //countryId
-        expect(jsonData.country.Id).not.toBeNull();
-        expect(typeof jsonData.country.id).toBe('number');
-        console.log(jsonData);
-        console.log(jsonData.countryId);
+            //companyLegalName
+            expect(jsonData.companyLegalName).toBeTruthy();
+            expect(typeof jsonData.companyLegalName).toBe('string');
         
-        //countryName
-        expect(typeof jsonData.country.name).toBe('string');
-        expect(jsonData.country.name).toBeTruthy();
-        
-        //legalAddress
-        expect(jsonData.legalAddress.address).toBeTruthy();
-        expect(typeof jsonData.legalAddress.address).toBe('string');
-        //legalAddress - City
-        expect(jsonData.legalAddress.city.Id).not.toBeNull();
-        expect(typeof jsonData.legalAddress.city.id).toBe('number');
+            //phoneNumber
+            expect(jsonData.phoneNumber).toBeTruthy();
+            expect(typeof jsonData.phoneNumber).toBe('string');
+            expect(jsonData.phoneNumber).toHaveLength(11);
 
-        //legalAddress - PostCode
-        expect(jsonData.legalAddress.postcode).toBeTruthy();
-        expect(typeof jsonData.legalAddress.postcode).toBe('string');
-        
+            //e-mail
+            expect(jsonData.email).toBeTruthy();
+            expect(typeof jsonData.email).toBe('string');
 
-        //correspondenceAddress
-        expect(jsonData.correspondenceAddress.address).toBeTruthy();
-        expect(typeof jsonData.correspondenceAddress.address).toBe('string');
-        
-        //correspondenceAddress - City
-        expect(jsonData.correspondenceAddress.city.Id).not.toBeNull();
-        expect(typeof jsonData.correspondenceAddress.city.id).toBe('number');
-        //correspondenceAddress - PostCode
-        expect(jsonData.correspondenceAddress.postcode).toBeTruthy();
-        expect(typeof jsonData.correspondenceAddress.postcode).toBe('string');
+            //countryId
+            expect(jsonData.country.Id).not.toBeNull();
+            expect(typeof jsonData.country.id).toBe('number');
+            console.log(jsonData);
+            console.log(jsonData.countryId);
+            
+            //countryName
+            expect(typeof jsonData.country.name).toBe('string');
+            expect(jsonData.country.name).toBeTruthy();
+            
+            //legalAddress
+            expect(jsonData.legalAddress.address).toBeTruthy();
+            expect(typeof jsonData.legalAddress.address).toBe('string');
+            //legalAddress - City
+            expect(jsonData.legalAddress.city.Id).not.toBeNull();
+            expect(typeof jsonData.legalAddress.city.id).toBe('number');
 
-        //companyRegistrationNumbers - REGON
-        expect(jsonData.companyRegistrationNumbers[0].type.name).toBe('REGON');
-        expect(jsonData.companyRegistrationNumbers[0].number).toBeTruthy();
-        expect(jsonData.companyRegistrationNumbers[0].number).toHaveLength(14);
+            //legalAddress - PostCode
+            expect(jsonData.legalAddress.postcode).toBeTruthy();
+            expect(typeof jsonData.legalAddress.postcode).toBe('string');
+            
 
-        //companyRegistrationNumbers - NIP
-        expect(jsonData.companyRegistrationNumbers[1].type.name).toBe('NIP');
-        expect(jsonData.companyRegistrationNumbers[1].number).toBeTruthy();
-        expect(jsonData.companyRegistrationNumbers[1].number).toHaveLength(10);
+            //correspondenceAddress
+            expect(jsonData.correspondenceAddress.address).toBeTruthy();
+            expect(typeof jsonData.correspondenceAddress.address).toBe('string');
+            
+            //correspondenceAddress - City
+            expect(jsonData.correspondenceAddress.city.Id).not.toBeNull();
+            expect(typeof jsonData.correspondenceAddress.city.id).toBe('number');
+            //correspondenceAddress - PostCode
+            expect(jsonData.correspondenceAddress.postcode).toBeTruthy();
+            expect(typeof jsonData.correspondenceAddress.postcode).toBe('string');
 
-    //Сheck comment
-    expect(jsonData.comment).toBeTruthy();
-    expect(typeof jsonData.comment).toBe('string');
+            //companyRegistrationNumbers - REGON
+            expect(jsonData.companyRegistrationNumbers[0].type.name).toBe('REGON');
+            expect(jsonData.companyRegistrationNumbers[0].number).toBeTruthy();
+            expect(jsonData.companyRegistrationNumbers[0].number).toHaveLength(14);
 
-    // Check isBlocked, isActive, isArchived(boolean values)
-    expect(jsonData.isBlocked).toBe(false);
-    expect(jsonData.isActive).toBe(true);
-    expect(jsonData.isArchived).toBe(false);
+            //companyRegistrationNumbers - NIP
+            expect(jsonData.companyRegistrationNumbers[1].type.name).toBe('NIP');
+            expect(jsonData.companyRegistrationNumbers[1].number).toBeTruthy();
+            expect(jsonData.companyRegistrationNumbers[1].number).toHaveLength(10);
+
+            //Сheck comment
+            expect(jsonData.comment).toBeTruthy();
+            expect(typeof jsonData.comment).toBe('string');
+
+            // Check isBlocked, isActive, isArchived(boolean values)
+            expect(jsonData.isBlocked).toBe(false);
+            expect(jsonData.isActive).toBe(true);
+            expect(jsonData.isArchived).toBe(false);
 
 
     });
