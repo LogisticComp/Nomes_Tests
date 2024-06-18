@@ -7,6 +7,7 @@ const requestData = generateRequestData();
 let token: string | undefined;
 let companyId: number | undefined
 
+//test Review Irina, Roman
 
 describe("Company module Tests", () => {
     test("Auth", async () => {
