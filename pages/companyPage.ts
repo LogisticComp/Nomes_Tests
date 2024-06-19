@@ -8,13 +8,10 @@ export class urlCompany {
     static addCompanyUrl: string = "/v1/api/companies";
     static getCompanyUrl: string = "/v1/api/companies/";
     static editCompanyUrl: string = "/v1/api/companies/";
-
-  
-
-}
+};
 
 //Generate data for creation company
-export const generateRequestData = () => {
+export const generateRequestDataAddCompany = () => {
   return {
     companyShortName: faker.company.name(),
     companyLegalName: faker.company.name(),
@@ -51,5 +48,25 @@ export const generateRequestData = () => {
   };
 };
 
-// Генерация данных и вывод на консоль
-const requestData = generateRequestData();
+//Generate data for editing company
+export const generateRequestDataEditCompany = () => {
+  return {
+    companyShortName: faker.company.name(),
+    companyLegalName: faker.company.name(),
+    websiteURL: faker.internet.url(),
+    phoneNumber: "48" + faker.string.numeric(9),
+    email: faker.internet.email(),
+    legalAddress: {
+      address: faker.location.streetAddress(),
+      cityId: faker.helpers.arrayElement(cityIds),
+      postcode: faker.string.numeric(5)
+    },
+    correspondenceAddress: {
+      address: faker.location.streetAddress(),
+      cityId: faker.helpers.arrayElement(cityIds),
+      postcode: faker.string.numeric(5)
+    },
+    countryId: 82,
+    comment: faker.lorem.sentence(),
+  };
+};
