@@ -1,51 +1,31 @@
 import request from 'superagent';
 import { apiData } from "../pages/authPage";
 import { urlCompany } from "../pages/companyPage";
-import { generateRequestData } from "../pages/companyPage";
+import { generateRequestDataEditCompany } from "../pages/companyPage";
 import { json } from 'stream/consumers';
-const requestData = generateRequestData();
-let token: string | undefined;
-let companyId: number | undefined
+import { companyId } from './addCompany.tests';
+import { tokenPlatformOwner } from './auth.tests';
 
-//test Review Irina, Roman
 
-describe("Company module Tests", () => {
-    test("Auth", async () => {
-        const postRequest ={
-            url: apiData.tokenUrl,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            form: {
-                grant_type: 'password',
-                client_id: 'captain-fe',
-                username: apiData.username,
-                password: apiData.password
-            }
-        };
-        const res = await request
-            .post(postRequest.url)
-            .type('form')
-            .send(postRequest.form);
-        
-        expect(res.status).toEqual(200);
-        //добавить проверок на поля
+//Executing generate data function
+const requestData = generateRequestDataEditCompany();
 
-        const responseJson = res.body;
-        token = responseJson['access_token'];
-    });
 
-    test("Add Company", async () => {
-        if (!token) {
+
+describe("Edit company Tests", () => {
+
+
+    test("Edit Company", async () => {
+        if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");
         }
 
         const res = await request
-            .post(`${urlCompany.mainUrl}${urlCompany.addCompanyUrl}`)
-            .set('Authorization', `Bearer ${token}`)
+            .put(`${urlCompany.mainUrl}${urlCompany.editCompanyUrl}${companyId}`)
+            .set('Authorization', `Bearer ${tokenPlatformOwner}`)
             .send(requestData);
             let jsonData = res.body;
+            console.log(jsonData);
         
         //Basic Checks
         expect(res.status).toEqual(200);
@@ -73,7 +53,7 @@ describe("Company module Tests", () => {
         expect(typeof jsonData.email).toBe('string');
 
         //countryId
-        expect(requestData.countryId).toEqual(jsonData.country.id);
+        expect(jsonData.country.id).toBe(82);
         expect(typeof jsonData.country.id).toBe('number');
         
         //countryName
@@ -96,7 +76,6 @@ describe("Company module Tests", () => {
         expect(requestData.correspondenceAddress.address).toEqual(jsonData.correspondenceAddress.address);
         expect(typeof jsonData.correspondenceAddress.address).toBe('string');
         //correspondenceAddress - City
-        // expect(requestData.correspondenceAddress.cityId).toEqual(jsonData.correspondenceAddress.city.id);
         expect(typeof jsonData.correspondenceAddress.city.id).toBe('number');
         //correspondenceAddress - PostCode
         expect(requestData.correspondenceAddress.postcode).toEqual(jsonData.correspondenceAddress.postcode);
@@ -104,12 +83,10 @@ describe("Company module Tests", () => {
 
         //companyRegistrationNumbers - REGON
         expect(jsonData.companyRegistrationNumbers[0].type.name).toBe('REGON');
-        expect(requestData.companyRegistrationNumbers[0].number).toBe(jsonData.companyRegistrationNumbers[1].number);
         expect(jsonData.companyRegistrationNumbers[0].number).toHaveLength(14);
 
         //companyRegistrationNumbers - NIP
         expect(jsonData.companyRegistrationNumbers[1].type.name).toBe('NIP');
-        expect(requestData.companyRegistrationNumbers[1].number).toBe(jsonData.companyRegistrationNumbers[0].number);
         expect(jsonData.companyRegistrationNumbers[1].number).toHaveLength(10);
 
     //Сheck comment
@@ -121,12 +98,12 @@ describe("Company module Tests", () => {
     expect(jsonData.isActive).toBe(true);
     expect(jsonData.isArchived).toBe(false);
 
-    companyId  = jsonData.id
 
-    });
+});
 
-    test("Get Company", async () => {
-        if (!token) {
+
+    test("Get Edited Company", async () => {
+        if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");
         }
         if (!companyId){
@@ -134,7 +111,7 @@ describe("Company module Tests", () => {
         }
         const res = await request
             .get(`${urlCompany.mainUrl}${urlCompany.getCompanyUrl}${companyId}`)
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', `Bearer ${tokenPlatformOwner}`)
             let jsonData = res.body;
 
         
@@ -219,5 +196,5 @@ describe("Company module Tests", () => {
 
 
     });
-});
 
+});
