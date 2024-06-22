@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "npx jest"
+    "api": "npx jest",
+    "format-code": "prettier --write \"**/*.ts\""
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "@playwright/test": "^1.44.1",
     "@types/jest": "^29.5.12",
     "jest": "^29.7.0",
+    "prettier": "3.3.2",
     "ts-jest": "^29.1.4"
   }
 }
