@@ -16,7 +16,6 @@ describe("Archive Company Tests", () => {
         //Basic Checks
         expect(res.status).toEqual(200);
         expect(res.body).toEqual({});
-
     });
 
     test("Check archive company Status", async () => {
@@ -31,7 +30,6 @@ describe("Archive Company Tests", () => {
         expect(typeof jsonData.id).toBe("number");
         expect(typeof jsonData.createdAt).toBe("number");
         expect(typeof jsonData.updatedAt).toBe("number");
-        
 
         //CompanyShortName
         expect(jsonData.companyShortName).toBeTruthy();
@@ -98,6 +96,5 @@ describe("Archive Company Tests", () => {
         expect(jsonData.isBlocked).toBe(false);
         expect(jsonData.isActive).toBe(true);
         expect(jsonData.isArchived).toBe(true);
-
     });
 });

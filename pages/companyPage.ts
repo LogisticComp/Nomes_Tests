@@ -2,7 +2,6 @@ import { faker } from "@faker-js/faker";
 
 const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 
-
 //URL
 export class urlCompany {
     static mainUrl: string = "http://109.205.183.105:8081";
