@@ -2,10 +2,9 @@ import request from "superagent";
 import { urlCompany } from "../pages/companyPage";
 import { companyId } from "./2_addCompany.tests";
 import { tokenPlatformOwner } from "./1_auth.tests";
-import { apiData, gettingToken } from "../pages/authPage";
 
 describe("Archive Company Tests", () => {
-    test("Archive Tests", async () => {
+    test("Archive Test", async () => {
         if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");
         }

@@ -8,7 +8,7 @@ class CustomSequencer extends Sequencer {
       '2_addCompany.tests.ts',
       '3_editCompany.tests.ts',
       '4_archiveCompany.tests.ts',
-      '5_unArchiveCompany.tests.ts',
+      '5_inactiveCompany.tests.ts',
     ];
 
     return tests.sort((a, b) => {
