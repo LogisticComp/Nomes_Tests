@@ -4,4 +4,5 @@ module.exports = {
     testEnvironment: "node",
     testMatch: ["**/apiTests/**/*.tests.ts"],
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+    testSequencer: "./testSequencer.js",
 };

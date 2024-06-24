@@ -9,5 +9,3 @@ export class apiData {
 export const gettingToken: { Authorization: string } = {
     Authorization: `Bearer ${tokenPlatformOwner}`,
 };
-
-console.log(tokenPlatformOwner);
