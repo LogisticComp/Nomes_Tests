@@ -17,7 +17,7 @@ describe ("Active\Inactive Company", () => {
         expect(res.body).toEqual({});
     });
 
-    test("Check archived company Status", async () => {
+    test("Check inactived company Status", async () => {
         const res = await request
             .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
