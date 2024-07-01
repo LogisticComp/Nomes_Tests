@@ -15,6 +15,8 @@
     "@types/superagent": "^8.1.7",
     "circular-json": "^0.5.9",
     "faker": "^6.6.6",
+    "flatted": "^3.3.1",
+    "json-decycle": "^3.0.0",
     "playwright": "^1.44.1",
     "superagent": "^9.0.2",
     "ts-node": "^10.9.2",

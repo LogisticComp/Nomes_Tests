@@ -10,6 +10,9 @@ const requestData = generateRequestDataAddCompany();
 export let companyId: number | undefined;
 
 describe("Add Company tests", () => {
+
+
+
     test("Add Company", async () => {
         if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");
@@ -181,4 +184,19 @@ describe("Add Company tests", () => {
         expect(jsonData.isActive).toBe(true);
         expect(jsonData.isArchived).toBe(false);
     });
+    
+    // test("companyShortName validation", async () => {
+    //     const invalidRequestData = {
+    //         ...requestData,
+    //         companyShortName: ''
+    //     };
+    
+    //     const res = await request
+    //         .post(`${urlCompany.mainUrl}${urlCompany.companyUrl}`)
+    //         .set("Authorization", `Bearer ${tokenPlatformOwner}`)
+    //         .send(invalidRequestData);
+    
+    //     expect(res.status).toEqual(400);
+    //     console.log(res.body);
+    // });
 });

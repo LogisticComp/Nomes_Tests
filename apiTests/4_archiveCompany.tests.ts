@@ -101,9 +101,7 @@ describe("Archive Company Tests", () => {
         if (!tokenPlatformOwner) {
             throw new Error("Acces token is missing");
         }
-        if (companyId) {
-            console.log(companyId);
-        }
+
 
         const res = await request
             .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}/unarchive`)
