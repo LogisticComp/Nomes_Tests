@@ -11,6 +11,13 @@ export let companyId: number | undefined;
 
 describe("Add Company tests", () => {
 
+    beforeEach(async () => {
+        // Очистка или инициализация состояния перед каждым тестом
+    });
+
+    afterEach(async () => {
+        // Очистка состояния после каждого теста
+    });
 
 
     test("Add Company", async () => {

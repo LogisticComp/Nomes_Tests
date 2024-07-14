@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "npx jest",
+    "api": "npx jest --runInBand",
     "format-code": "prettier --write \"**/*.ts\""
   },
   "author": "",
