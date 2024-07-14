@@ -8,6 +8,15 @@ import { tokenPlatformOwner } from "./1_auth.tests";
 const requestData = generateRequestDataEditCompany();
 
 describe("Edit company Tests", () => {
+
+    beforeEach(async () => {
+        // Очистка или инициализация состояния перед каждым тестом
+    });
+
+    afterEach(async () => {
+        // Очистка состояния после каждого теста
+    });
+    
     test("Edit Company", async () => {
         if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");

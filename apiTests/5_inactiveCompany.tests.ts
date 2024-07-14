@@ -4,7 +4,17 @@ import { companyId } from "./2_addCompany.tests";
 import { tokenPlatformOwner } from "./1_auth.tests";
 
 describe ("Active\Inactive Company", () => {
-    test("Inactive Company", async () => {
+
+    beforeEach(async () => {
+        // Очистка или инициализация состояния перед каждым тестом
+    });
+
+    afterEach(async () => {
+        // Очистка состояния после каждого теста
+    });
+
+    
+    test("Inactive Company Test", async () => {
         if (!tokenPlatformOwner) { 
             throw new Error("Access token is missing");
         }
