@@ -1,10 +1,11 @@
 import request from "superagent";
 import { apiData } from "../pages/authPage";
-export let tokenPlatformOwner: string | undefined;
-export let tokenPlatformOwnerTest: string | undefined;
+import { reqData } from "./2_addCompany.tests";
+import { companyAdminEmail } from "../pages/authPage";
 
 
-describe("Auth", () => {
+describe("auth OrgAdmin", () => {
+
 
     beforeEach(async () => {
         // Очистка или инициализация состояния перед каждым тестом
@@ -14,30 +15,10 @@ describe("Auth", () => {
         // Очистка состояния после каждого теста
     });
 
-    test("Login as PlatforOwner", async () => {
-        const postRequest = {
-            url: apiData.tokenUrl,
-            method: "POST",
-            Headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            form: {
-                grant_type: "password",
-                client_id: "captain-fe",
-                username: apiData.username,
-                password: apiData.password,
-            },
-        };
-        const res = await request.post(postRequest.url).type("form").send(postRequest.form);
+    test("Login as OrgAdmin", async () => {
 
-        expect(res.status).toEqual(200);
-        //добавить проверок на поля
+        console.log("Global companyAdminEmail in other test:", companyAdminEmail); // This should now have the expected value
 
-        const responseJson = res.body;
-        tokenPlatformOwner = responseJson["access_token"];
-    });
-
-    // test("Login as OrgAdmin", async () => {
     //     const postRequest = {
     //         url: apiData.tokenUrl,
     //         method: "POST",
@@ -47,7 +28,7 @@ describe("Auth", () => {
     //         form: {
     //             grant_type: "password",
     //             client_id: "captain-fe",
-    //             username: companyAdminLogin,
+    //             username: reqData.,
     //             password: apiData.defaultPasswordOrgAdmin,
     //         },
     //     };
@@ -58,5 +39,7 @@ describe("Auth", () => {
 
     //     const responseJson = res.body;
     //     const tokenOrgAdmin = responseJson["access_token"];
-    // });
+    //     console.log(companyAdminLogin);
+    });
+
 });
