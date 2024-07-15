@@ -2,6 +2,7 @@ import request from "superagent";
 import { urlCompany } from "../pages/companyPage";
 import { companyId } from "./2_addCompany.tests";
 import { tokenPlatformOwner } from "./1_auth.tests";
+import { apiData } from "../pages/authPage";
 
 describe ("Active\Inactive Company", () => {
 
@@ -19,7 +20,7 @@ describe ("Active\Inactive Company", () => {
             throw new Error("Access token is missing");
         }
         const res = await request
-        .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}/inactive`)
+        .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/inactive`)
         .set("Authorization", `Bearer ${tokenPlatformOwner}`)
 
         //Basic Checks
@@ -29,7 +30,7 @@ describe ("Active\Inactive Company", () => {
 
     test("Check inactived company Status", async () => {
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 
@@ -110,7 +111,7 @@ describe ("Active\Inactive Company", () => {
 
     test("Activate Company", async () => {
         const res = await request
-        .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}/active`)
+        .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/active`)
         .set("Authorization", `Bearer ${tokenPlatformOwner}`)
                 
         //Basic Checks
@@ -120,7 +121,7 @@ describe ("Active\Inactive Company", () => {
 
     test("Check activated company", async () => {
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 

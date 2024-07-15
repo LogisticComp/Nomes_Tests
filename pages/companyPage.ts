@@ -1,11 +1,9 @@
 import { faker } from "@faker-js/faker";
-import { companyId } from "../apiTests/2_addCompany.tests";
 
 const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 
 //URL
 export class urlCompany {
-    static mainUrl: string = "http://109.205.183.105:8081";
     static companyUrl: string = "/v1/api/companies";
     static addCompanyUrl: string = 'http://109.205.183.105:8081/v1/api/companies'
     static getCompanyUrl: string = 'http://109.205.183.105:8081/v1/api/companies';

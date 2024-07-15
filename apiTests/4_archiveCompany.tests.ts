@@ -2,6 +2,7 @@ import request from "superagent";
 import { urlCompany } from "../pages/companyPage";
 import { companyId } from "./2_addCompany.tests";
 import { tokenPlatformOwner } from "./1_auth.tests";
+import { apiData } from "../pages/authPage";
 
 describe("Archive Company Tests", () => {
 
@@ -19,7 +20,7 @@ describe("Archive Company Tests", () => {
             throw new Error("Access token is missing");
         }
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}/archive`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/archive`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
 
         //Basic Checks
@@ -29,7 +30,7 @@ describe("Archive Company Tests", () => {
 
     test("Check archived company Status", async () => {
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 
@@ -115,7 +116,7 @@ describe("Archive Company Tests", () => {
 
 
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}/unarchive`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/unarchive`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
 
         //Basic Checks
@@ -125,7 +126,7 @@ describe("Archive Company Tests", () => {
 
     test("Check archived company Again Status", async () => {
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 

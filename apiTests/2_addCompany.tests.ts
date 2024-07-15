@@ -2,6 +2,7 @@ import request from "superagent";
 import { urlCompany } from "../pages/companyPage";
 import { generateRequestDataAddCompany } from "../pages/companyPage";
 import { tokenPlatformOwner } from "./1_auth.tests";
+import { apiData } from "../pages/authPage";
 
 //Executing Generate data function
 const requestData = generateRequestDataAddCompany();
@@ -26,7 +27,7 @@ describe("Add Company tests", () => {
         }
 
         const res = await request
-            .post(`${urlCompany.mainUrl}${urlCompany.companyUrl}`)
+            .post(`${apiData.mainUrl}${urlCompany.companyUrl}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`)
             .send(requestData);
         let jsonData = res.body;
@@ -114,7 +115,7 @@ describe("Add Company tests", () => {
             throw new Error("CompanyID is missing");
         }
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 

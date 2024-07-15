@@ -10,6 +10,7 @@ class CustomSequencer extends Sequencer {
       '4_archiveCompany.tests.ts',
       '5_inactiveCompany.tests.ts',
       '6_DRAFTcompanyValidationChecks.tests.ts',
+      '7_authOrgAdmin.tests.ts',
     ];
 
     return tests.sort((a, b) => {

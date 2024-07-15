@@ -3,6 +3,7 @@ import { urlCompany } from "../pages/companyPage";
 import { generateRequestDataEditCompany } from "../pages/companyPage";
 import { companyId } from "./2_addCompany.tests";
 import { tokenPlatformOwner } from "./1_auth.tests";
+import { apiData } from "../pages/authPage";
 
 //Executing generate data function
 const requestData = generateRequestDataEditCompany();
@@ -23,7 +24,7 @@ describe("Edit company Tests", () => {
         }
 
         const res = await request
-            .put(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .put(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`)
             .send(requestData);
         let jsonData = res.body;
@@ -108,7 +109,7 @@ describe("Edit company Tests", () => {
             throw new Error("CompanyID is missing");
         }
         const res = await request
-            .get(`${urlCompany.mainUrl}${urlCompany.companyUrl}/${companyId}`)
+            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
         let jsonData = res.body;
 
