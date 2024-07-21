@@ -5,8 +5,8 @@ const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 //URL
 export class urlCompany {
     static companyUrl: string = "/v1/api/companies";
-    static addCompanyUrl: string = 'http://109.205.183.105:8081/v1/api/companies'
-    static getCompanyUrl: string = 'http://109.205.183.105:8081/v1/api/companies';
+    static addCompanyUrl: string = "http://109.205.183.105:8081/v1/api/companies";
+    static getCompanyUrl: string = "http://109.205.183.105:8081/v1/api/companies";
 }
 
 //Generate data for creation company

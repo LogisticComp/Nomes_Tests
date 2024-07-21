@@ -1,11 +1,17 @@
 import request from "superagent";
 import { urlCompany } from "../pages/companyPage";
-import { companyId } from "./2_addCompany.tests";
+import { generateRequestDataAddCompany } from "../pages/companyPage";
 import { tokenPlatformOwner } from "./1_auth.tests";
 import { apiData } from "../pages/authPage";
 
-describe("Archive Company Tests", () => {
+//Executing Generate data function
+const requestData = generateRequestDataAddCompany();
 
+// Global variables
+export let companyId: number | undefined;
+export let emailOrgAdmin: string | undefined;
+
+describe("Add Company tests", () => {
     beforeEach(async () => {
         // Очистка или инициализация состояния перед каждым тестом
     });
@@ -14,25 +20,18 @@ describe("Archive Company Tests", () => {
         // Очистка состояния после каждого теста
     });
 
-    
-    test("Archive Test", async () => {
+    test("Add Company", async () => {
         if (!tokenPlatformOwner) {
             throw new Error("Access token is missing");
         }
-        const res = await request
-            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/archive`)
-            .set("Authorization", `Bearer ${tokenPlatformOwner}`);
 
-        //Basic Checks
-        expect(res.status).toEqual(200);
-        expect(res.body).toEqual({});
-    });
-
-    test("Check archived company Status", async () => {
         const res = await request
-            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
-            .set("Authorization", `Bearer ${tokenPlatformOwner}`);
+            .post(`${apiData.mainUrl}${urlCompany.companyUrl}`)
+            .set("Authorization", `Bearer ${tokenPlatformOwner}`)
+            .send(requestData);
         let jsonData = res.body;
+        companyId = jsonData.id;
+        emailOrgAdmin = jsonData.admins[0].email;
 
         //Basic Checks
         expect(res.status).toEqual(200);
@@ -42,89 +41,78 @@ describe("Archive Company Tests", () => {
         expect(typeof jsonData.updatedAt).toBe("number");
 
         //CompanyShortName
-        expect(jsonData.companyShortName).toBeTruthy();
+        expect(requestData.companyShortName).toEqual(jsonData.companyShortName);
         expect(typeof jsonData.companyShortName).toBe("string");
 
         //companyLegalName
-        expect(jsonData.companyLegalName).toBeTruthy();
+        expect(requestData.companyLegalName).toEqual(jsonData.companyLegalName);
         expect(typeof jsonData.companyLegalName).toBe("string");
 
         //phoneNumber
-        expect(jsonData.phoneNumber).toBeTruthy();
+        expect(requestData.phoneNumber).toEqual(jsonData.phoneNumber);
         expect(typeof jsonData.phoneNumber).toBe("string");
-        expect(jsonData.phoneNumber).toHaveLength(11);
+        expect(requestData.phoneNumber).toHaveLength(11);
 
         //e-mail
-        expect(jsonData.email).toBeTruthy();
+        expect(requestData.email.toLowerCase()).toEqual(jsonData.email);
         expect(typeof jsonData.email).toBe("string");
 
         //countryId
-        expect(jsonData.country.Id).not.toBeNull();
+        expect(requestData.countryId).toEqual(jsonData.country.id);
         expect(typeof jsonData.country.id).toBe("number");
 
         //countryName
         expect(typeof jsonData.country.name).toBe("string");
-        expect(jsonData.country.name).toBeTruthy();
+        expect(jsonData.country.name).toEqual("Poland");
 
         //legalAddress
-        expect(jsonData.legalAddress.address).toBeTruthy();
+        expect(requestData.legalAddress.address).toEqual(jsonData.legalAddress.address);
         expect(typeof jsonData.legalAddress.address).toBe("string");
         //legalAddress - City
-        expect(jsonData.legalAddress.city.Id).not.toBeNull();
+        expect(requestData.legalAddress.cityId).toEqual(jsonData.legalAddress.city.id);
         expect(typeof jsonData.legalAddress.city.id).toBe("number");
 
         //legalAddress - PostCode
-        expect(jsonData.legalAddress.postcode).toBeTruthy();
+        expect(requestData.legalAddress.postcode).toEqual(jsonData.legalAddress.postcode);
         expect(typeof jsonData.legalAddress.postcode).toBe("string");
 
         //correspondenceAddress
-        expect(jsonData.correspondenceAddress.address).toBeTruthy();
+        expect(requestData.correspondenceAddress.address).toEqual(jsonData.correspondenceAddress.address);
         expect(typeof jsonData.correspondenceAddress.address).toBe("string");
-
         //correspondenceAddress - City
-        expect(jsonData.correspondenceAddress.city.Id).not.toBeNull();
+        // expect(requestData.correspondenceAddress.cityId).toEqual(jsonData.correspondenceAddress.city.id);
         expect(typeof jsonData.correspondenceAddress.city.id).toBe("number");
         //correspondenceAddress - PostCode
-        expect(jsonData.correspondenceAddress.postcode).toBeTruthy();
+        expect(requestData.correspondenceAddress.postcode).toEqual(jsonData.correspondenceAddress.postcode);
         expect(typeof jsonData.correspondenceAddress.postcode).toBe("string");
 
-         //Написать функцию, которая будет обрабатывать нип и регон
         // //companyRegistrationNumbers - REGON
         // expect(jsonData.companyRegistrationNumbers[0].type.name).toBe("REGON");
-        // expect(jsonData.companyRegistrationNumbers[0].number).toBeTruthy();
+        // expect(requestData.companyRegistrationNumbers[0].number).toBe(jsonData.companyRegistrationNumbers[1].number);
         // expect(jsonData.companyRegistrationNumbers[0].number).toHaveLength(14);
 
         // //companyRegistrationNumbers - NIP
         // expect(jsonData.companyRegistrationNumbers[1].type.name).toBe("NIP");
-        // expect(jsonData.companyRegistrationNumbers[1].number).toBeTruthy();
+        // expect(requestData.companyRegistrationNumbers[1].number).toBe(jsonData.companyRegistrationNumbers[0].number);
         // expect(jsonData.companyRegistrationNumbers[1].number).toHaveLength(10);
 
         //Сheck comment
-        expect(jsonData.comment).toBeTruthy();
+        expect(requestData.comment).toEqual(jsonData.comment);
         expect(typeof jsonData.comment).toBe("string");
 
         // Check isBlocked, isActive, isArchived(boolean values)
         expect(jsonData.isBlocked).toBe(false);
         expect(jsonData.isActive).toBe(true);
-        expect(jsonData.isArchived).toBe(true);
+        expect(jsonData.isArchived).toBe(false);
     });
 
-    test("UnArchive Company", async () => {
+    test("Get Company", async () => {
         if (!tokenPlatformOwner) {
-            throw new Error("Acces token is missing");
+            throw new Error("Access token is missing");
         }
-
-
-        const res = await request
-            .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}/unarchive`)
-            .set("Authorization", `Bearer ${tokenPlatformOwner}`);
-
-        //Basic Checks
-        expect(res.status).toEqual(200);
-        expect(res.body).toEqual({});
-    });
-
-    test("Check archived company Again Status", async () => {
+        if (!companyId) {
+            throw new Error("CompanyID is missing");
+        }
         const res = await request
             .get(`${apiData.mainUrl}${urlCompany.companyUrl}/${companyId}`)
             .set("Authorization", `Bearer ${tokenPlatformOwner}`);
@@ -184,7 +172,7 @@ describe("Archive Company Tests", () => {
         expect(jsonData.correspondenceAddress.postcode).toBeTruthy();
         expect(typeof jsonData.correspondenceAddress.postcode).toBe("string");
 
-         //Написать функцию, которая будет обрабатывать нип и регон
+        //Написать функцию, которая будет обрабатывать нип и регон
         // //companyRegistrationNumbers - REGON
         // expect(jsonData.companyRegistrationNumbers[0].type.name).toBe("REGON");
         // expect(jsonData.companyRegistrationNumbers[0].number).toBeTruthy();
@@ -204,4 +192,19 @@ describe("Archive Company Tests", () => {
         expect(jsonData.isActive).toBe(true);
         expect(jsonData.isArchived).toBe(false);
     });
+
+    // test("companyShortName validation", async () => {
+    //     const invalidRequestData = {
+    //         ...requestData,
+    //         companyShortName: ''
+    //     };
+
+    //     const res = await request
+    //         .post(`${urlCompany.mainUrl}${urlCompany.companyUrl}`)
+    //         .set("Authorization", `Bearer ${tokenPlatformOwner}`)
+    //         .send(invalidRequestData);
+
+    //     expect(res.status).toEqual(400);
+    //     console.log(res.body);
+    // });
 });
