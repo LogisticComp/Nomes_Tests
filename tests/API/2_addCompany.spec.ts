@@ -3,27 +3,29 @@ import { test, expect, request as baseRequest } from '@playwright/test';
 import { apiData } from '../../pages/authPage';
 import { urlCompany } from '../../pages/companyPage';
 import { generateRequestDataAddCompany } from '../../pages/companyPage';
-import { tokenPlatformOwner } from './1_auth.spec';
+import { APIRequestContext } from "playwright";
+import { testWithFixture } from "../../fixtures/fixtures";
 
 let requestData = generateRequestDataAddCompany();
 
 test.describe('Adding Company Tests', () => {
-  test.beforeEach(async ({ request }) => {
-    if (!tokenPlatformOwner) {
+  let testRequest: APIRequestContext
+  test.beforeEach(async () => {
+    if (!process.env.TEST_API_TOKEN) {
       throw new Error('Access token is missing');
     }
 
     // Установите токен в заголовках для всех запросов
-    request = await baseRequest.newContext({
+    testRequest = await baseRequest.newContext({
       extraHTTPHeaders: {
-        'Authorization': `Bearer ${tokenPlatformOwner}`,
+        'Authorization': `Bearer ${process.env.TEST_API_TOKEN}`,
         'Content-Type': 'application/json',
       },
     });
   });
 
-  test('Add Company', async ({ request }) => {
-    const response = await request.post(`${apiData.mainUrl}${urlCompany.companyUrl}`, {
+  test('Add Company', async () => {
+    const response = await testRequest.post(`${apiData.mainUrl}${urlCompany.companyUrl}`, {
       data: requestData,
     });
 
@@ -32,4 +34,19 @@ test.describe('Adding Company Tests', () => {
     const jsonData = await response.json();
     // Дополнительные проверки
   });
+
+});
+
+testWithFixture.describe('Adding Company Tests', () => {
+   testWithFixture('Add Company 2', async ({authorisedRequest}) => {
+    const response = await authorisedRequest.post(`${apiData.mainUrl}${urlCompany.companyUrl}`, {
+      data: requestData,
+    });
+
+    expect(response.status()).toBe(200);
+
+    const jsonData = await response.json();
+    // Дополнительные проверки
+  });
+
 });
