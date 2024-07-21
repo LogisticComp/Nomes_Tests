@@ -1,6 +1,9 @@
 import { test as setup } from "@playwright/test";
 import { apiData } from "../pages/authPage";
 
+
+//readme https://playwright.dev/docs/api-testing#configuration
+//the most typical usage with saving cookies and local storage data https://playwright.dev/docs/api-testing#configuration
 setup("authenticate", async ({ request }) => {
     const postRequest = {
         url: apiData.tokenUrl,

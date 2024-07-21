@@ -8,7 +8,7 @@ export type MyOptions = {
 type MyFixtures = {
     authorisedRequest: APIRequestContext;
 };
-
+//readme https://playwright.dev/docs/test-fixtures#fixtures-options
 export const testWithFixture = test.extend<MyOptions & MyFixtures>({
     apiData: apiData,
     authorisedRequest: async ({ request, apiData }, use) => {
