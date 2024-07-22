@@ -5,6 +5,7 @@ export const apiData = {
     username: "default.admin@tect.com",
     password: "0406Warsaw!@#",
     defaultPasswordOrgAdmin: "Qwerty12345!",
+    testId: null,
 }
 
 // export const gettingToken: { Authorization: string } = {
