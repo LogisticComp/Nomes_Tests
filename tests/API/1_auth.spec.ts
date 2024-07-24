@@ -1,13 +1,12 @@
-import { test, expect, request } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { apiData } from "../../pages/authPage";
 
-//global variables
-export let tokenPlatformOwner: string | undefined;
-
 test.describe("Auth", () => {
-    test.beforeEach(async () => {});
+    test.beforeEach(async () => {
+    });
 
-    test.afterEach(async () => {});
+    test.afterEach(async () => {
+    });
 
     test("Login as PlatformOwner", async ({ request }) => {
         const postRequest = {
@@ -28,10 +27,8 @@ test.describe("Auth", () => {
             headers: postRequest.headers,
         });
 
-        
-        const responseJson = await response.json();
-        const tokenPlatformOwner = responseJson["access_token"];
 
+        const responseJson = await response.json();
 
         expect(response.status()).toBe(200);
         expect(responseJson).toHaveProperty("access_token");

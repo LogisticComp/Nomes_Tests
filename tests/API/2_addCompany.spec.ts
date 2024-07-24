@@ -1,35 +1,24 @@
 // tests/addCompany.spec.ts
-import { test, expect, request as baseRequest } from '@playwright/test';
-import { apiData } from '../../pages/authPage';
-import { urlCompany } from '../../pages/companyPage';
-import { generateRequestDataAddCompany } from '../../pages/companyPage';
-import { tokenPlatformOwner } from './1_auth.spec';
+import { expect } from "@playwright/test";
+import { urlCompany } from "../../pages/companyPage";
+import { generateRequestDataAddCompany } from "../../pages/companyPage";
+import { testWithFixture } from "../../fixtures/fixtures";
 
 let requestData = generateRequestDataAddCompany();
 
-test.describe('Adding Company Tests', () => {
-  test.beforeEach(async ({ request }) => {
-    if (!tokenPlatformOwner) {
-      throw new Error('Access token is missing');
-    }
 
-    // Установите токен в заголовках для всех запросов
-    request = await baseRequest.newContext({
-      extraHTTPHeaders: {
-        'Authorization': `Bearer ${tokenPlatformOwner}`,
-        'Content-Type': 'application/json',
-      },
-    });
-  });
+testWithFixture.describe("Adding Company Tests", () => {
+    testWithFixture("Add Company", async ({ authorisedRequest, apiData }) => {
+        const response = await authorisedRequest.post(`${apiData.mainUrl}${urlCompany.companyUrl}`, {
+            data: requestData,
+        });
 
-  test('Add Company', async ({ request }) => {
-    const response = await request.post(`${apiData.mainUrl}${urlCompany.companyUrl}`, {
-      data: requestData,
+        expect(response.status()).toBe(200);
+        console.log({ apiData });
+        const jsonData = await response.json();
+        apiData.testId = jsonData.id;
+        console.log({ apiData });
+        // Дополнительные проверки
     });
 
-    expect(response.status()).toBe(200);
-
-    const jsonData = await response.json();
-    // Дополнительные проверки
-  });
 });
