@@ -193,18 +193,5 @@ describe("Add Company tests", () => {
         expect(jsonData.isArchived).toBe(false);
     });
 
-    // test("companyShortName validation", async () => {
-    //     const invalidRequestData = {
-    //         ...requestData,
-    //         companyShortName: ''
-    //     };
 
-    //     const res = await request
-    //         .post(`${urlCompany.mainUrl}${urlCompany.companyUrl}`)
-    //         .set("Authorization", `Bearer ${tokenPlatformOwner}`)
-    //         .send(invalidRequestData);
-
-    //     expect(res.status).toEqual(400);
-    //     console.log(res.body);
-    // });
 });

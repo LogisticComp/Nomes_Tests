@@ -3,11 +3,16 @@ import { faker } from "@faker-js/faker";
 const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 
 //URL
-export class urlCompany {
-    static companyUrl: string = "/v1/api/companies";
-    static addCompanyUrl: string = "http://109.205.183.105:8081/v1/api/companies";
-    static getCompanyUrl: string = "http://109.205.183.105:8081/v1/api/companies";
+export const  urlCompany = {
+     companyUrl: "/v1/api/companies",
+     addCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
+     getCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
 }
+
+export const addedCompanyData = { 
+    addedcompanyId: null
+}
+
 
 //Generate data for creation company
 export const generateRequestDataAddCompany = () => {

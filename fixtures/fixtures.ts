@@ -1,9 +1,12 @@
 import { test, request as baseRequest } from "@playwright/test";
 import { apiData } from "../pages/authPage";
 import { APIRequestContext } from "playwright";
+import { addedCompanyData } from "../pages/companyPage";
 
 export type MyOptions = {
     apiData: typeof apiData;
+    addedCompanyData: typeof addedCompanyData;
+
 };
 type MyFixtures = {
     authorisedRequest: APIRequestContext;
@@ -11,6 +14,8 @@ type MyFixtures = {
 //readme https://playwright.dev/docs/test-fixtures#fixtures-options
 export const testWithFixture = test.extend<MyOptions & MyFixtures>({
     apiData: apiData,
+    addedCompanyData: addedCompanyData,
+
     authorisedRequest: async ({ request, apiData }, use) => {
         const postRequest = {
             url: apiData.tokenUrl,
