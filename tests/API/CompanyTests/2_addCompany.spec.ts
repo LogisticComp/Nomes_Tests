@@ -1,12 +1,11 @@
 // tests/addCompany.spec.ts
 import { expect } from "@playwright/test";
-import { urlCompany } from "../../pages/companyPage";
-import { generateRequestDataAddCompany } from "../../pages/companyPage";
-import { testWithFixture } from "../../fixtures/fixtures";
-import exp from "constants";
+import { urlCompany } from "../../../pages/companyPage";
+import { generateRequestDataAddCompany } from "../../../pages/companyPage";
+import { testWithFixture } from "../../../fixtures/fixtures";
 
 let requestData = generateRequestDataAddCompany();
-
+//export default function addCompany(){
 testWithFixture.describe.configure({ mode: "serial"});
 testWithFixture.describe("Adding Company Tests", () => {
     testWithFixture("Add Company", async ({ authorisedRequest, apiData, addedCompanyData }) => {
@@ -16,6 +15,7 @@ testWithFixture.describe("Adding Company Tests", () => {
 
         const jsonData = await response.json();
         addedCompanyData.addedcompanyId = jsonData.id;
+        addedCompanyData.emailOrgAdmin = jsonData.admins[0].email;
       
 
         //Basic Checks
@@ -93,7 +93,6 @@ testWithFixture.describe("Adding Company Tests", () => {
     });
 
     testWithFixture("Get Company", async ({ authorisedRequest, apiData, addedCompanyData }) => {
-      //console.log( { addedCompanyData })
       const response = await authorisedRequest.get(`${apiData.mainUrl}${urlCompany.companyUrl}/${addedCompanyData.addedcompanyId}`);
       const jsonData = await response.json()
         
@@ -175,3 +174,4 @@ testWithFixture.describe("Adding Company Tests", () => {
   });
       
 });
+//}

@@ -5,12 +5,16 @@ const cityIds = [439, 934, 1336, 1099, 1501, 2049];
 //URL
 export const  urlCompany = {
      companyUrl: "/v1/api/companies",
-     addCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
-     getCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
+     //addCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
+     //getCompanyUrl: "http://109.205.183.105:8081/v1/api/companies",
 }
 
-export const addedCompanyData = { 
-    addedcompanyId: null
+export const addedCompanyData: {
+    addedcompanyId: number | null,
+    emailOrgAdmin: string | undefined,
+ } = { 
+    addedcompanyId: null,
+    emailOrgAdmin: "",
 }
 
 

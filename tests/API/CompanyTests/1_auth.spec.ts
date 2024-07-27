@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { apiData } from "../../pages/authPage";
+import { apiData } from "../../../pages/authPage";
 
+//export default function Auth(){
 test.describe("Auth", () => {
     test.beforeEach(async () => {
     });
@@ -35,3 +36,4 @@ test.describe("Auth", () => {
         expect(responseJson).toHaveProperty("token_type");
     });
 });
+//}
