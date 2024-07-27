@@ -2,7 +2,7 @@ import { test, request as baseRequest } from "@playwright/test";
 import { apiData } from "../pages/authPage";
 import { APIRequestContext } from "playwright";
 import { addedCompanyData } from "../pages/companyPage";
-
+//test
 export type MyOptions = {
     apiData: typeof apiData;
     addedCompanyData: typeof addedCompanyData;
