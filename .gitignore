@@ -3,3 +3,14 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/codeStyles/Project.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/jsLinters/eslint.xml
+/.idea/libraries/data.xml
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/Nomes_Tests.iml
+/.idea/prettier.xml
+/.idea/vcs.xml
