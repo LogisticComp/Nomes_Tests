@@ -11,7 +11,7 @@ export const  urlCompany = {
 
 export const addedCompanyData: {
     addedcompanyId: number | null,
-    emailOrgAdmin: string | undefined,
+    emailOrgAdmin: string,
  } = { 
     addedcompanyId: null,
     emailOrgAdmin: "",
