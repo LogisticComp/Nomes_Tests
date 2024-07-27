@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
-export class urlOrder {
-    static addOrder: string = "v1/api/orders";
+export const urlOrder =  {
+    addOrder: "v1/api/orders",
 }
 
 function getRandomElement(array: any) {
