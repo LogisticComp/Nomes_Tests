@@ -6,7 +6,6 @@ import { addedCompanyData } from "../pages/companyPage";
 export type MyOptions = {
     apiData: typeof apiData;
     addedCompanyData: typeof addedCompanyData;
-
 };
 type MyFixtures = {
     authorisedRequest: APIRequestContext;
@@ -29,7 +28,6 @@ export const testWithFixture = test.extend<MyOptions & MyFixtures>({
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            
         };
         const response = await request.post(postRequest.url, {
             data: postRequest.data,
@@ -38,25 +36,24 @@ export const testWithFixture = test.extend<MyOptions & MyFixtures>({
 
         const responseJson = await response.json();
 
-
         const authRequest = await baseRequest.newContext({
             extraHTTPHeaders: {
-                "Authorization": `Bearer ${responseJson["access_token"]}`,
+                Authorization: `Bearer ${responseJson["access_token"]}`,
                 "Content-Type": "application/json",
             },
         });
 
         await use(authRequest);
     },
-    
-    authorisedRequestOrgAdmin: async ({ request, apiData, addedCompanyData  }, use) => {
+
+    authorisedRequestOrgAdmin: async ({ request, apiData, addedCompanyData }, use) => {
         const postRequest: Record<string, any> = {
             url: apiData.tokenUrl,
             data: new URLSearchParams({
                 grant_type: "password",
                 client_id: "captain-fe",
                 username: addedCompanyData.emailOrgAdmin,
-                password: apiData.password,
+                password: apiData.defaultPasswordOrgAdmin,
             }).toString(),
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -69,14 +66,13 @@ export const testWithFixture = test.extend<MyOptions & MyFixtures>({
 
         const responseJson = await response.json();
 
-
         const authRequest = await baseRequest.newContext({
             extraHTTPHeaders: {
-                "Authorization": `Bearer ${responseJson["access_token"]}`,
+                Authorization: `Bearer ${responseJson["access_token"]}`,
                 "Content-Type": "application/json",
             },
         });
 
         await use(authRequest);
-    }
+    },
 });
