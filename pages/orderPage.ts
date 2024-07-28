@@ -1,8 +1,8 @@
 import { faker } from "@faker-js/faker";
 
-export const urlOrder =  {
-    addOrder: "v1/api/orders",
-}
+export const urlOrder = {
+    addOrder: "/v1/api/orders",
+};
 
 function getRandomElement(array: any) {
     return array[Math.floor(Math.random() * array.length)];
@@ -16,7 +16,7 @@ export const generateRequestDataAddOrder = () => {
         loadingDate: 1721552147,
         loadingCountryId: 82,
         loadingCityId: 439,
-        companyNameLoading: faker.company.name(),
+        companyNameLoading: faker.company.name().slice(0, 30),
         addressLoading: faker.location.streetAddress(),
         postcodeLoading: faker.string.numeric(5),
         loadingCoordinates: {
@@ -26,7 +26,7 @@ export const generateRequestDataAddOrder = () => {
         unloadingDate: 1721552147,
         unloadingCountryId: 82,
         unloadingCityId: 439,
-        addressUnloading: faker.location.secondaryAddress(),
+        addressUnloading: faker.location.secondaryAddress().slice(0, 30),
         companyNameUnloading: faker.company.name(),
         postcodeUnloading: faker.string.numeric(5),
         unloadingCoordinates: {
