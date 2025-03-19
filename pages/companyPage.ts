@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 const cityIds = [439, 934, 1336, 1099, 1501, 2049];
+const  maxUsersVehicles = [10, 25, 50, 100]; 
 
 //URL
 export const  urlCompany = {
@@ -53,6 +54,8 @@ export const generateRequestDataAddCompany = () => {
             firstName: faker.person.firstName(),
             lastName: faker.person.lastName(),
         },
+        maxUsers: faker.helpers.arrayElement(maxUsersVehicles),
+        maxVehicles: faker.helpers.arrayElement(maxUsersVehicles)
     };
 };
 
@@ -76,5 +79,7 @@ export const generateRequestDataEditCompany = () => {
         },
         countryId: 82,
         comment: faker.lorem.sentence(),
+        maxUsers: faker.helpers.arrayElement(maxUsersVehicles),
+        maxVehicles: faker.helpers.arrayElement(maxUsersVehicles)
     };
 };
