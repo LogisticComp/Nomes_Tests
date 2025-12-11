@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import { apiData } from './pages/authPage';
+import { MainData } from './pages/authPage';
 
 /**
  * Read environment variables from file.
@@ -28,7 +28,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     // Base URL for the API
-    baseURL: apiData.mainUrl, // assuming mainUrl is the base for all endpoints
+    baseURL: MainData?.mainUrl || process.env.BASE_URL || 'http://localhost:3000',
     trace: 'on-first-retry',
   },
   projects: [
